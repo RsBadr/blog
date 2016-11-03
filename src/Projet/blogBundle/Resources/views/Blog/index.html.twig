@@ -1,0 +1,5 @@
+<ul>
+  {% for post in listPosts %}
+    <li><a href={{ path('projetblog_getpostpage', {'id': post.id } ) }}>{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
