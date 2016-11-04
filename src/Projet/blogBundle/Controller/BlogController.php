@@ -6,8 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller
 {
-    public function indexAction()
+    public function indexAction($cpt = 0)
     {
+        $cpt++;
     	$repository = $this
 		  ->getDoctrine()
 		  ->getManager()
@@ -20,9 +21,15 @@ class BlogController extends Controller
 		  0                               // Offset
 		);
 
+        $qb = $repository->createQueryBuilder('post');
+        $count = $qb->select('COUNT(post)')->getQuery()->getSingleScalarResult();
         return $this->render(
         	'ProjetblogBundle:Blog:index.html.twig',
-        	array('listPosts' => $listPosts)
+        	array(
+                'listPosts' => $listPosts,
+                'nbrPostTotal' => $count,
+                'cpt' => $cpt
+                )
         	);
     }
 

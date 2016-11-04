@@ -1,5 +1,69 @@
-<ul>
-  {% for post in listPosts %}
-    <li><a href={{ path('projetblog_getpostpage', {'id': post.id } ) }}>{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="page-header">
+                    Page d'accueil du Blog
+                    <small></small>
+                </h1>
+                {% for post in listPosts %}
+	                <h2>
+	                    <a href="#">{{post.title}}</a>
+	                </h2>
+	                <p class="lead">
+	                    écrit par <a href="index.php">???</a>
+	                </p>
+	                <p><span class="glyphicon glyphicon-time"></span>Publié le {{ post.published|date("d/m/Y") }}</p>
+	                <hr>
+	                {#<img class="img-responsive" src="http://placehold.it/900x300" alt="">
+	                <hr>#}
+	                <p>{{post.content}}</p>
+	                <a class="btn btn-primary" href="#">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+	                <hr>
+                {% endfor %}
+                <!-- Pager -->
+                <ul class="pager">
+                	{% if cpt != 1 %}
+	                    <li class="previous">
+	                        <a href="#">&larr; Plus récents</a>
+	                    </li>
+                    {% endif %}
+                    {% if (cpt+1)*10 < nbrPostTotal %}
+	                    <li class="next">
+	                        <a href="#">Plus vieux &rarr;</a>
+	                    </li>
+	                {% endif %}
+                </ul>
+
+            </div>
+
+            <div class="col-md-4">
+            	<div class="well">
+	                <h4>Description du blog</h4>
+	                <p>une petite description du blog et des auteurs...</p>
+           		</div>
+                <div class="well">
+                    <h4>Blog Categories</h4>
+                    <div class="row">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Categorie 1</a></li>
+                            <li><a href="#">Categorie 2</a></li>
+                            <li><a href="#">...</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+{% endblock %}
