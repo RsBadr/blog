@@ -1,1 +1,41 @@
-{{post.urlAlias}}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-8">
+                <h1>{{post.title}}</h1>
+                <hr>
+
+                <p><span class="glyphicon glyphicon-time"></span>Publié le {{ post.published|date("d/m/Y") }}/p>
+
+                <hr>
+
+                <p class="lead">{{post.content}}</p>
+
+                <hr>
+
+                <div class="well">
+                    <h4>Laisser un commentaire:</h4>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                </div>
+
+             
+            </div>
+            
+            {{ include('header.html.twig') }}
+
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+{% endblock %}
