@@ -1,6 +1,6 @@
 <?php
 
-namespace Projet\blogBundle\Entity;
+namespace BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Post
  *
  * @ORM\Table(name="post")
- * @ORM\Entity(repositoryClass="Projet\blogBundle\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="BlogBundle\Repository\PostRepository")
  */
 class Post
 {

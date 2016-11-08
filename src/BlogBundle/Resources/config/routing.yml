@@ -1,0 +1,9 @@
+blog_homepage:
+    path:     /
+    defaults: { _controller: BlogBundle:Blog:index }
+
+blog_getpostpage:
+    path:     /post/{id}
+    defaults: { _controller: BlogBundle:Blog:getPost }
+    requirements:
+      id: \d*

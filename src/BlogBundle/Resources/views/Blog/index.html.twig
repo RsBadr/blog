@@ -10,13 +10,13 @@
                 </h1>
                 {% for post in listPosts %}
 	                <h2>
-	                    <a href="{{ path('projetblog_getpostpage', {'id': post.id}) }}">{{post.title}}</a>
+	                    <a href="{{ path('blog_getpostpage', {'id': post.id}) }}">{{post.title}}</a>
 	                </h2>
 	                <p><span class="glyphicon glyphicon-time"></span>Publié le {{ post.published|date("d/m/Y") }}</p>
 	                <hr>
 	                {#<img class="img-responsive" src="http://placehold.it/900x300" alt="">
 	                <hr>#}
-	                <p>{{post.content}}</p>
+	                <p>{{post.content | truncate(400, true, '...') }}</p>
 	                <a class="btn btn-primary" href="#">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
 
 	                <hr>

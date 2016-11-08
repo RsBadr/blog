@@ -1,9 +1,0 @@
-projetblog_homepage:
-    path:     /
-    defaults: { _controller: ProjetblogBundle:Blog:index }
-
-projetblog_getpostpage:
-    path:     /post/{id}
-    defaults: { _controller: ProjetblogBundle:Blog:getPost }
-    requirements:
-      id: \d*

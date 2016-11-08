@@ -1,6 +1,6 @@
 <?php
 
-namespace Projet\blogBundle\Repository;
+namespace BlogBundle\Repository;
 
 /**
  * PostRepository

@@ -1,5 +1,9 @@
-projetblog:
-    resource: "@ProjetblogBundle/Resources/config/routing.yml"
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+blog:
+    resource: "@BlogBundle/Resources/config/routing.yml"
     prefix:   /
 
 app:

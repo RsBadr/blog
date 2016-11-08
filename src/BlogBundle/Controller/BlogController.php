@@ -1,6 +1,6 @@
 <?php
 
-namespace Projet\blogBundle\Controller;
+namespace BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -12,7 +12,7 @@ class BlogController extends Controller
     	$repository = $this
 		  ->getDoctrine()
 		  ->getManager()
-		  ->getRepository('ProjetblogBundle:Post')
+		  ->getRepository('BlogBundle:Post')
 		;
 		$listPosts = $repository->findBy(
 		  array(), // Critere
@@ -24,7 +24,7 @@ class BlogController extends Controller
         $qb = $repository->createQueryBuilder('post');
         $count = $qb->select('COUNT(post)')->getQuery()->getSingleScalarResult();
         return $this->render(
-        	'ProjetblogBundle:Blog:index.html.twig',
+        	'BlogBundle:Blog:index.html.twig',
         	array(
                 'listPosts' => $listPosts,
                 'nbrPostTotal' => $count,
@@ -38,11 +38,11 @@ class BlogController extends Controller
     	$repository = $this
 		  ->getDoctrine()
 		  ->getManager()
-		  ->getRepository('ProjetblogBundle:Post')
+		  ->getRepository('BlogBundle:Post')
 		;
 		$post = $repository->find($id);
         return $this->render(
-        	'ProjetblogBundle:Blog:post.html.twig', 
+        	'BlogBundle:Blog:post.html.twig', 
         	array('post'  => $post)
         );
     }
