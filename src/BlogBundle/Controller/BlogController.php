@@ -20,7 +20,7 @@ class BlogController extends Controller
 		  10,                              // Limite
 		  0                               // Offset
 		);
-
+        $user = $this->getUser();
         $qb = $repository->createQueryBuilder('post');
         $count = $qb->select('COUNT(post)')->getQuery()->getSingleScalarResult();
         return $this->render(
@@ -28,7 +28,8 @@ class BlogController extends Controller
         	array(
                 'listPosts' => $listPosts,
                 'nbrPostTotal' => $count,
-                'cpt' => $cpt
+                'cpt' => $cpt,
+                'user' => $user
                 )
         	);
     }

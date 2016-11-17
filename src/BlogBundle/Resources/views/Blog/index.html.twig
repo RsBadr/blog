@@ -2,52 +2,61 @@
 
 {% block body %}
     <div class="container">
-        <div class="row">
-            <div class="col-md-8">
+        
+            
                 <h1 class="page-header">
                     Page d'accueil du Blog
                     <small></small>
                 </h1>
-                <div class="row row-eq-height">
-                {% for i in 0..listPosts|length-1 %}
-                    {% if i is divisible by(2) and i != 0 %}
-                        </div>
-                        <hr>
+                <div class="row">
+                    <div class="col-md-8">
                         <div class="row row-eq-height">
-                    {% endif %}
-                    <div class="col-xs-8 ">
-	                <h2>
-	                    <a href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}">{{listPosts[i].title}}</a>
-	                </h2>
-	                <p><span class="glyphicon glyphicon-time"></span>Publié le {{ listPosts[i].published|date("d/m/Y") }}</p>
-	                <hr>
-	                {#<img class="img-responsive" src="http://placehold.it/900x300" alt="">
-	                <hr>#}
-	                <p>{{listPosts[i].content | truncate(400, true, '...') }}</p>
-	                <a class="btn btn-primary" href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        {% for i in 0..listPosts|length-1 %}
+                            {% if i is divisible by(2) and i != 0 %}
+                                </div>
+                                <hr>
+                                <div class="row row-eq-height">
+                            {% endif %}
+                            <div class="col-md-6 pull-right">
+        	                <h2>
+        	                    <a href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}">{{listPosts[i].title}}</a>
+        	                </h2>
+        	                <p><span class="glyphicon glyphicon-time"></span>Publié le {{ listPosts[i].published|date("d/m/Y") }}</p>
+        	                <hr>
+        	                {#<img class="img-responsive" src="http://placehold.it/900x300" alt="">
+        	                <hr>#}
+        	                <p>{{listPosts[i].content | truncate(400, true, '...') }}</p>
+        	                <a class="btn btn-primary" href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                            </div>
+                        {% endfor %}
+                        </div>
+                <!-- Pager -->
+                        <ul class="pager">
+                        	{% if cpt != 1 %}
+        	                    <li class="previous">
+        	                        <a href="#">&larr; Plus récents</a>
+        	                    </li>
+                            {% endif %}
+                            {% if (cpt+1)*10 < nbrPostTotal %}
+        	                    <li class="next">
+        	                        <a href="#">Plus vieux &rarr;</a>
+        	                    </li>
+        	                {% endif %}
+                        </ul>
 
                     </div>
-                {% endfor %}
+                       <div class="col-md-4">
+                            <div class="well">
+                                <h4>Description du blog</h4>
+                                <p>Et eodem impetu Domitianum praecipitem per scalas itidem funibus constrinxerunt, eosque coniunctos per ampla spatia civitatis acri raptavere discursu. iamque artuum et membrorum divulsa conpage superscandentes corpora mortuorum ad ultimam truncata deformitatem velut exsaturati mox abiecerunt in flumen.
+
+                                Quod cum ita sit, paucae domus studiorum seriis cultibus antea celebratae nunc ludibriis ignaviae torpentis exundant, vocali sonu, perflabili tinnitu fidium resultantes. denique pro philosopho cantor et in locum oratoris doctor artium ludicrarum accitur et bybliothecis sepulcrorum ritu in perpetuum clausis organa fabricantur hydraulica, et lyrae ad speciem carpentorum ingentes tibiaeque et histrionici gestus instrumenta non levia.</p>
+                            </div>
+            
+                        </div>
+
                 </div>
-                <!-- Pager -->
-                <ul class="pager">
-                	{% if cpt != 1 %}
-	                    <li class="previous">
-	                        <a href="#">&larr; Plus récents</a>
-	                    </li>
-                    {% endif %}
-                    {% if (cpt+1)*10 < nbrPostTotal %}
-	                    <li class="next">
-	                        <a href="#">Plus vieux &rarr;</a>
-	                    </li>
-	                {% endif %}
-                </ul>
-
-            </div>
-            {{ include('header.html.twig') }}
-
-
-        </div>
         <!-- /.row -->
 
         <hr>
