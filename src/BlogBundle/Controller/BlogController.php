@@ -41,10 +41,12 @@ class BlogController extends Controller
 		  ->getManager()
 		  ->getRepository('BlogBundle:Post')
 		;
+    $user = $this->getUser();
 		$post = $repository->find($id);
         return $this->render(
-        	'BlogBundle:Blog:post.html.twig', 
-        	array('post'  => $post)
+        	'BlogBundle:Blog:post.html.twig',
+        	array('post'  => $post, 'user' => $user)
+
         );
     }
 }

@@ -3,7 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@BlogBundle/Resources/config/services.yml" }
-    - { resource: "@UserBundle/Resources/config/services.yml" }
 
 
 
@@ -15,7 +14,7 @@ parameters:
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
-    
+
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -83,4 +82,4 @@ services:
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: UserBundle\Entity\User
+    user_class: BlogBundle\Entity\User
