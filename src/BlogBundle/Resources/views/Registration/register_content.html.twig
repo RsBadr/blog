@@ -9,25 +9,25 @@
 				<div class="panel-body" >
 						<form id="signupform" class="form-horizontal" action="{{ path("fos_user_registration_register") }}" method="post" role="form">
 							<div class="form-group">
-									<label for="email" class="col-md-3 control-label">Email</label>
+									<label for="email" class="col-md-3 control-label">{{ 'form.email'|trans }}</label>
 									<div class="col-md-9">
 											{{ form_widget(form.email, { 'attr': {'class': 'form-control' } }) }}
 									</div>
 							</div>
 							<div class="form-group">
-									<label for="firstname" class="col-md-3 control-label">{{ 'security.login.username'|trans }}</label>
+									<label for="firstname" class="col-md-3 control-label">{{ 'form.username'|trans }}</label>
 									<div class="col-md-9">
 											{{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
 									</div>
 							</div>
 							<div class="form-group">
-									<label for="firstname" class="col-md-3 control-label">{{ 'security.login.password'|trans }}</label>
+									<label for="firstname" class="col-md-3 control-label">{{ 'form.password'|trans }}</label>
 									<div class="col-md-9">
 											{{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
 									</div>
 							</div>
 							<div class="form-group">
-									<label for="firstname" class="col-md-3 control-label">{{ 'security.login.password'|trans }}</label>
+									<label for="firstname" class="col-md-3 control-label">{{ 'form.password_confirmation'|trans }}</label>
 									<div class="col-md-9">
 											{{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
 									</div>

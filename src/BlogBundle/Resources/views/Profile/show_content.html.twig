@@ -1,12 +1,26 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-
-<div class="body">
-    <div class="wrapper">
-
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <li  ><a class="bouton" href="{{ path('fos_user_profile_edit') }}">Edit</a></li>
+<div class="container">
+	  <div id="profilbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+						<div class="panel-title">Profil</div>
+				</div>
+        <div class="panel-body" >
+          <div class="fos_user_user_show">
+            <div style="margin-bottom: 25px" >
+              <span class="input-group-addon">{{ 'profile.show.username'|trans }} : {{ user.username }}</span>
+            </div>
+            <div style="margin-bottom: 25px" >
+              <span class="input-group-addon">{{ 'profile.show.email'|trans }} : {{ user.email }}</span>
+            </div>
+            <div style="margin-top:10px" class="form-group ">
+                <div class="col-sm-12 controls">
+                  <a class="btn btn-success center-block" href="{{ path('fos_user_profile_edit') }}">Modifier</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </div>
