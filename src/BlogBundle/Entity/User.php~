@@ -5,7 +5,8 @@ namespace BlogBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints\DateTime;
+use BlogBundle\Entity\Post;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
@@ -26,17 +27,84 @@ class User extends BaseUser
     protected $inscriptionDate;
 
     /**
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="statut", type="integer")
      *
      */
-    protected $status;
+    protected $statut;
+
+    /**
+     * @var ArrayCollection $departements
+     *
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Post", mappedBy="author", cascade={"persist", "remove", "merge"})
+     */
+    private $posts;
 
     public function __construct()
     {
         parent::__construct();
-        $inscriptionDate = new DateTime('now');
-        $status = 0;
+        $this->inscriptionDate = new \DateTime();
+        $this->status = 0;
 
         // your own logic
+    }
+
+    /**
+     * Set inscriptionDate
+     *
+     * @param \DateTime $inscriptionDate
+     *
+     * @return User
+     */
+    public function setInscriptionDate($inscriptionDate)
+    {
+        $this->inscriptionDate = $inscriptionDate;
+
+        return $this;
+    }
+
+    /**
+     * Get inscriptionDate
+     *
+     * @return \DateTime
+     */
+    public function getInscriptionDate()
+    {
+        return $this->inscriptionDate;
+    }
+
+
+
+    /**
+     * Add post
+     *
+     * @param \BlogBundle\Entity\Post $post
+     *
+     * @return User
+     */
+    public function addPost(\BlogBundle\Entity\Post $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \BlogBundle\Entity\Post $post
+     */
+    public function removePost(\BlogBundle\Entity\Post $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

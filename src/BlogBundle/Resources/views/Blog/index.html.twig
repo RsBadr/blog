@@ -24,16 +24,16 @@
                                 <hr>
                                 <div class="row row-eq-height">
                             {% endif %}
-                            <div class="col-md-6 pull-right">
-        	                <h2>
-        	                    <a href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}">{{listPosts[i].title}}</a>
-        	                </h2>
-        	                <p><span class="glyphicon glyphicon-time"></span>Publié le {{ listPosts[i].published|date("d/m/Y") }}</p>
-        	                <hr>
-        	                {#<img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        	                <hr>#}
-        	                <p>{{listPosts[i].content | truncate(400, true, '...') }}</p>
-        	                <a class="btn btn-primary" href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            <div class="col-md-6 w3ls-left wow fadeInDown animated pull-right">
+            	                <h2>
+            	                    <a href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}">{{listPosts[i].title}}</a>
+            	                </h2>
+            	                <p><span class="glyphicon glyphicon-time"></span>Publié le {{ listPosts[i].published|date("d/m/Y") }} | <span class="glyphicon glyphicon-user"></span> Écrit par {{ listPosts[i].author.username}}</p>
+            	                <hr>
+            	                {#<img class="img-responsive" src="http://placehold.it/900x300" alt="">
+            	                <hr>#}
+            	                <p>{{listPosts[i].content | truncate(400, true, '...') |  nl2br }}</p>
+            	                <a class="btn btn-primary" href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                             </div>
                         {% endfor %}

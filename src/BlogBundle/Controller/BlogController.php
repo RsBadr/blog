@@ -14,11 +14,12 @@ class BlogController extends Controller
 		  ->getManager()
 		  ->getRepository('BlogBundle:Post')
 		;
+    $offset = $cpt*10-10;
 		$listPosts = $repository->findBy(
 		  array(), // Critere
 		  array('published' => 'desc'),        // Tri
 		  10,                              // Limite
-		  0                               // Offset
+		  $offset                               // Offset
 		);
         $user = $this->getUser();
         $qb = $repository->createQueryBuilder('post');

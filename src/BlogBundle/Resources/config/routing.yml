@@ -12,13 +12,21 @@ blog_getpostpage:
     requirements:
       id: \d*
 
+blog_allpostuserpage:
+    path:     /{username}/posts
+    defaults: { _controller: BlogBundle:Post:index }
+
+blog_newpostpage:
+    path:     /newPost
+    defaults: { _controller: BlogBundle:Post:new }
+
 fos_user_security:
     path: /routing/security.xml
     prefix: /
 
 fos_user_profile:
     path: routing/profile.xml
-    prefix: /profile 
+    prefix: /profile
 
 fos_user_registration:
     path : routing/registration.xml

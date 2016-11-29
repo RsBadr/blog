@@ -59,8 +59,7 @@ class Post
 
     public function __construct()
     {
-
-        $this->published = new \DateTime();
+        $this->$published = new \DateTime();
     }
 
     /**

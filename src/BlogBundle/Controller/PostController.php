@@ -5,6 +5,7 @@ namespace BlogBundle\Controller;
 use BlogBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use BlogBundle\Form\PostType;
 
 /**
  * Post controller.
@@ -16,15 +17,30 @@ class PostController extends Controller
      * Lists all post entities.
      *
      */
-    public function indexAction()
+    public function indexAction($username, $cpt = 0)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $posts = $em->getRepository('BlogBundle:Post')->findAll();
-
-        return $this->render('post/index.html.twig', array(
-            'posts' => $posts,
-        ));
+        $cpt++;
+        $postRepository = $em->getRepository('BlogBundle:Post');
+        $offset = ($cpt*10)-10;
+        $posts = $postRepository->findBy(
+        		  array('author' => $this->getUser()), // Critere
+        		  array('published' => 'desc'),        // Tri
+        		  10,                              // Limite
+        		  $offset                              // Offset
+        		);
+        $user = $this->getUser();
+        $qb = $postRepository->createQueryBuilder('post');
+        $count = $qb->select('COUNT(post)')->getQuery()->getSingleScalarResult();
+        return $this->render(
+        'BlogBundle:Post:index.html.twig',
+        array(
+                'listPosts' => $posts,
+                'nbrPostTotal' => $count,
+                'cpt' => $cpt,
+                'user' => $user
+                )
+          );
     }
 
     /**
@@ -34,18 +50,32 @@ class PostController extends Controller
     public function newAction(Request $request)
     {
         $post = new Post();
-        $form = $this->createForm('BlogBundle\Form\PostType', $post);
-        $form->handleRequest($request);
-
+        $form = $this->createForm(PostType::class, $post);
+         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $post->setAuthor($this->getUser());
+            # to keep letters & numbers
+            $s = $post->getTitle();
+            $s = preg_replace('/[^a-z0-9]+/i', '_', $s); # or...
+            $s = preg_replace('/[^a-z\d]+/i', '_', $s);
+
+            # to keep letters only
+            $s = preg_replace('/[^a-z]+/i', '_', $s);
+
+            # to keep letters, numbers & underscore
+            $s = preg_replace('/[^\w]+/', '_', $s);
+
+            # same as third example; suggested by @tchrist; ^\w = \W
+            $s = preg_replace('/\W+/', '_', $s);
+            $post->setUrlAlias($s);
             $em->persist($post);
             $em->flush($post);
 
             return $this->redirectToRoute('post_show', array('id' => $post->getId()));
         }
 
-        return $this->render('post/new.html.twig', array(
+        return $this->render('BlogBundle:Post:new.html.twig', array(
             'post' => $post,
             'form' => $form->createView(),
         ));
