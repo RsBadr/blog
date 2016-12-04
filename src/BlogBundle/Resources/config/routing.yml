@@ -2,9 +2,18 @@ blog_post:
     resource: "@BlogBundle/Resources/config/routing/post.yml"
     prefix:   /post
 
+
 blog_homepage:
     path:     /
     defaults: { _controller: BlogBundle:Blog:index }
+
+blog_searchresult:
+    path:     /search
+    defaults: { _controller: BlogBundle:Blog:search }
+
+blog_contact:
+    path:     /contact
+    defaults: { _controller: BlogBundle:Blog:contact }
 
 blog_getpostpage:
     path:     /post/{id}
@@ -19,6 +28,15 @@ blog_allpostuserpage:
 blog_newpostpage:
     path:     /newPost
     defaults: { _controller: BlogBundle:Post:new }
+
+
+blog_deletepost:
+    path:     /delete/{id}
+    defaults: { _controller: BlogBundle:Post:delete }
+
+blog_editpostpage:
+    path:     /edit/{id}
+    defaults: { _controller: BlogBundle:Post:edit }
 
 fos_user_security:
     path: /routing/security.xml

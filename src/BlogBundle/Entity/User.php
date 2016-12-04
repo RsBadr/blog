@@ -7,6 +7,9 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 use BlogBundle\Entity\Post;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
@@ -33,17 +36,24 @@ class User extends BaseUser
     protected $statut;
 
     /**
-     * @var ArrayCollection $departements
+     * @var ArrayCollection $posts
      *
      * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Post", mappedBy="author", cascade={"persist", "remove", "merge"})
      */
     private $posts;
 
+    /**
+     * @var ArrayCollection $comments
+     *
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="author", cascade={"persist", "remove", "merge"})
+     */
+    private $comments;
+
     public function __construct()
     {
         parent::__construct();
         $this->inscriptionDate = new \DateTime();
-        $this->status = 0;
+        $this->statut = 0;
     }
 
     /**
@@ -129,4 +139,39 @@ class User extends BaseUser
     {
         return $this->statut;
     }
+
+    /**
+     * Add comment
+     *
+     * @param \BlogBundle\Entity\Comment $comment
+     *
+     * @return User
+     */
+    public function addComment(\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \BlogBundle\Entity\Comment $comment
+     */
+    public function removeComment(\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
 }

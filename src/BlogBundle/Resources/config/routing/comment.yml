@@ -1,0 +1,12 @@
+comment_index:
+    path:     /
+    defaults: { _controller: "BlogBundle:Comment:index" }
+    methods:  GET
+
+comment_show:
+    path:     /{id}/show
+    defaults: { _controller: "BlogBundle:Comment:show" }
+    methods:  GET
+
+
+

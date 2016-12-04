@@ -124,14 +124,9 @@ class PostController extends Controller
      */
     public function deleteAction(Request $request, Post $post)
     {
-        $form = $this->createDeleteForm($post);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($post);
             $em->flush($post);
-        }
 
         return $this->redirectToRoute('post_index');
     }

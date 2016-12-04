@@ -5,10 +5,13 @@ namespace BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use BlogBundle\Entity\User;
 use Symfony\Component\Validator\Constraints\DateTime;
+use BlogBundle\Entity\Comment;
+use Doctrine\Common\Annotations\AnnotationReader;
 
 /**
  * Post
  *
+ *@ORM\Entity
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="BlogBundle\Repository\PostRepository")
  */
@@ -51,11 +54,18 @@ class Post
     private $published;
 
     /**
-     * @var Region $region
+     * @var User $author
      *
      * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\User", inversedBy="posts", cascade={"persist", "merge"})
      */
     private $author;
+
+    /**
+     * @var ArrayCollection $comments
+     *
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="postCommented", cascade={"persist", "remove", "merge"})
+     */
+    private $comments;
 
     public function __construct()
     {
@@ -191,5 +201,39 @@ class Post
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \BlogBundle\Entity\Comment $comment
+     *
+     * @return Post
+     */
+    public function addComment(\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \BlogBundle\Entity\Comment $comment
+     */
+    public function removeComment(\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

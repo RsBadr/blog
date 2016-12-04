@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Comments list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Commentdate</th>
+                <th>Content</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td><a href="{{ path('comment_show', { 'id': comment.id }) }}">{{ comment.id }}</a></td>
+                <td>{% if comment.commentDate %}{{ comment.commentDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ comment.content }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('comment_show', { 'id': comment.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

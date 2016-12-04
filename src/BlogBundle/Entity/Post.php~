@@ -5,10 +5,13 @@ namespace BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use BlogBundle\Entity\User;
 use Symfony\Component\Validator\Constraints\DateTime;
+use BlogBundle\Entity\Comment;
+use Doctrine\Common\Annotations\AnnotationReader;
 
 /**
  * Post
  *
+ *@ORM\Entity
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="BlogBundle\Repository\PostRepository")
  */
@@ -51,15 +54,23 @@ class Post
     private $published;
 
     /**
-     * @var Region $region
+     * @var User $author
      *
      * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\User", inversedBy="posts", cascade={"persist", "merge"})
      */
     private $author;
 
+    /**
+     * @var ArrayCollection $comments
+     *
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="postCommented", cascade={"persist", "remove", "merge"})
+     */
+    private $comments;
+
     public function __construct()
     {
-        $this->$published = new \DateTime();
+
+        $this->published = new \DateTime();
     }
 
     /**

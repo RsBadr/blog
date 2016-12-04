@@ -29,8 +29,8 @@
                                 <hr>
                                 <div class="center-block">
                 	                <a class="btn btn-primary" href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}"> Visualiser <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                  <a class="btn btn-success" href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}"> <span><i class="glyphicon glyphicon-edit"></i></span> Modifier </a>
-                                  <a class="btn btn-danger" href="{{ path('blog_getpostpage', {'id': listPosts[i].id}) }}"> <span><i class="glyphicon glyphicon-trash"></i></span> Supprimer </a>
+                                  <a class="btn btn-success" href="{{ path('blog_editpostpage', {'id': listPosts[i].id}) }}"> <span><i class="glyphicon glyphicon-edit"></i></span> Modifier </a>
+                                  <a class="btn btn-danger" href="{{ path('blog_deletepost', {'id': listPosts[i].id}) }}"> <span><i class="glyphicon glyphicon-trash"></i></span> Supprimer </a>
                                 </div>
                               </div>
                               <hr>

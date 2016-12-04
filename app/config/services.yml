@@ -4,7 +4,10 @@ parameters:
 #    parameter_name: value
 
 services:
+    blog.form.registration:
+       class: BlogBundle\Form\RegistrationType
+       tags:
+          - { name: form.type, alias: blog_user_registration }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-

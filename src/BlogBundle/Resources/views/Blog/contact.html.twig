@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info" >
+        <div class="panel-heading">
+          <div class="panel-title">Contactez-nous</div>
+        </div>
+        <div style="padding-top:30px" class="panel-body" >
+          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+            <form class="form-horizontal" action=" " method="post"  id="contact_form">
+              <fieldset>
+                <div class="form-group" style="margin: 15px">
+                  <div class="inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input  name="prenom" placeholder="Prénom" class="form-control"  type="text">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" style="margin: 15px">
+                  <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="nom" placeholder="Nom" class="form-control"  type="text">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" style="margin: 15px">
+                    <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                  <input name="email" placeholder="Adresse e-mail" class="form-control"  type="text">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" style="margin: 15px">
+                  <div class="inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                       <textarea class="form-control" row="10" name="content" placeholder="Message"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+      <!-- Success message -->
+      <div class="alert alert-success" role="alert" id="success_message">Envoyé! <i class="glyphicon glyphicon-thumbs-up"></i>Merci de nous avoir contacté, nous vous répondrons dans les plus brefs délais.</div>
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-primary" >Envoyer <span class="glyphicon glyphicon-send"></span></button>
+        </div>
+      </div>
+
+      </fieldset>
+    </form>
+</div>
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css`" href="{{ asset('public/css/contact.css') }}">
+{% endblock %}
+{% block javascripts %}
+      <script> var action = "{{ path('blog_contact')}}"; </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+    <script src="{{ asset('public/js/contact.js') }}"></script>
+
+{% endblock %}
+{% endblock %}

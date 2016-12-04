@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+          {% if error is not defined %}
+                <h1 class="page-header">
+                    Resultats de la recherche "{{search}}"
+                    <small>{{typesearch}}</small>
+                </h1>
+                <div class="row">
+                  <div class="col-md-4 pull-right">
+                       <div class="well">
+                           <h4>Description du blog</h4>
+                           <p>Et eodem impetu Domitianum praecipitem per scalas itidem funibus constrinxerunt, eosque coniunctos per ampla spatia civitatis acri raptavere discursu. iamque artuum et membrorum divulsa conpage superscandentes corpora mortuorum ad ultimam truncata deformitatem velut exsaturati mox abiecerunt in flumen.
+
+                           Quod cum ita sit, paucae domus studiorum seriis cultibus antea celebratae nunc ludibriis ignaviae torpentis exundant, vocali sonu, perflabili tinnitu fidium resultantes. denique pro philosopho cantor et in locum oratoris doctor artium ludicrarum accitur et bybliothecis sepulcrorum ritu in perpetuum clausis organa fabricantur hydraulica, et lyrae ad speciem carpentorum ingentes tibiaeque et histrionici gestus instrumenta non levia.</p>
+                       </div>
+
+                   </div>
+                    <div class="col-md-8 pull-left">
+                        <div class="row row-eq-height">
+                          {% if results is defined and results|length !=0 %}
+                            {% for i in 0..results|length-1 %}
+                                {% if i is divisible by(2) and i != 0 %}
+                                    </div>
+                                    <hr>
+                                    <div class="row row-eq-height">
+                                {% endif %}
+                                <div class="col-md-6 w3ls-left wow fadeInDown animated pull-right">
+                	                <h2>
+                	                    <a href="{{ path('blog_getpostpage', {'id': results[i].id}) }}">{{results[i].title}}</a>
+                	                </h2>
+                	                <p><span class="glyphicon glyphicon-time"></span>Publié le {{ results[i].published|date("d/m/Y") }} | <span class="glyphicon glyphicon-user"></span> Écrit par {{ results[i].author.username}}</p>
+                	                <hr>
+                	                {#<img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                	                <hr>#}
+                	                <p>{{results[i].content | truncate(400, true, '...') |  nl2br }}</p>
+                	                <a class="btn btn-primary" href="{{ path('blog_getpostpage', {'id': results[i].id}) }}">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                                </div>
+                            {% endfor %}
+                          {% else %}
+                            <h2> Pas d'articles disponibles </h2>
+                          {% endif %}
+                        </div>
+
+                    </div>
+
+
+                </div>
+        <!-- /.row -->
+
+        <hr>
+        {% else %}
+          <h1 class="page-header">
+              {{error}}
+          </h1>
+        {% endif %}
+    </div>
+{% endblock %}
